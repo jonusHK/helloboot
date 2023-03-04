@@ -1,7 +1,8 @@
 package tobyspring.helloboot
 
-class HelloController {
+class HelloController(val helloService: HelloService) {
+
     fun hello(name: String): String {
-        return "Hello $name"
+        return helloService.sayHello(requireNotNull(name))
     }
 }
