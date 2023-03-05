@@ -1,5 +1,6 @@
 package tobyspring.helloboot
 
+import org.springframework.boot.runApplication
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
 import org.springframework.context.annotation.Bean
@@ -24,5 +25,5 @@ class HellobootApplication {
 
 
 fun main(args: Array<String>) {
-    MySpringApplication.run(HellobootApplication::class.java, *args)
+    runApplication<HellobootApplication>(*args)
 }
