@@ -1,15 +1,22 @@
 package tobyspring.helloboot
 
+import org.springframework.context.ApplicationContext
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.RestController
 
 
-@RequestMapping("/hello")
-class HelloController(val helloService: HelloService) {
+@RestController
+class HelloController(
+    val helloService: HelloService,
+    val applicationContext: ApplicationContext
+) {
 
-    @GetMapping
-    @ResponseBody
+    init {
+        println("init")
+        println("applicationContext - ${this.applicationContext}")
+    }
+
+    @GetMapping("/hello")
     fun hello(name: String): String {
         return helloService.sayHello(requireNotNull(name))
     }
