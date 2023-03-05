@@ -13,4 +13,18 @@ class HelloServiceTest: AnnotationSpec() {
 
         ret shouldBe "Hello Test"
     }
+
+    @Test
+    fun helloDecorator() {
+        val decorator: HelloDecorator = HelloDecorator(object : HelloService {
+            override fun sayHello(name: String): String {
+                return name
+            }
+        })
+
+        val ret: String = decorator.sayHello("Test")
+
+        ret shouldBe "*Test*"
+
+    }
 }
