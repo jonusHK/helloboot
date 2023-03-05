@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 
+
 class HelloApiTest: AnnotationSpec() {
 
     @BeforeEach
@@ -29,7 +30,7 @@ class HelloApiTest: AnnotationSpec() {
         // header (content-type) text/plain
         res.headers.getFirst(HttpHeaders.CONTENT_TYPE) shouldStartWith MediaType.TEXT_PLAIN_VALUE
         // body Hello Spring
-        res.body shouldBe "Hello Spring"
+        res.body shouldBe "*Hello Spring*"
     }
 
     @Test
