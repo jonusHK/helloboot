@@ -1,46 +1,49 @@
 package tobyspring.helloboot
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.ServletContextInitializer
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
-import org.springframework.context.support.GenericApplicationContext
-import org.springframework.context.support.registerBean
-import org.springframework.http.HttpMethod
-import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
-import javax.servlet.http.HttpServlet
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+import org.springframework.web.servlet.DispatcherServlet
 
-@SpringBootApplication
-class HellobootApplication
+
+@Configuration
+class HellobootApplication {
+    @Bean
+    fun helloController(helloService: HelloService): HelloController {
+        return HelloController(helloService)
+    }
+
+    @Bean
+    fun helloService(): HelloService {
+        return SimpleHelloService()
+    }
+}
 
 fun main(args: Array<String>) {
-    val applicationContext = GenericApplicationContext().apply {
-        registerBean<SimpleHelloService>()
-        registerBean<HelloController>()
+    // DispatcherServlet 은 GenericWebApplicationContext 사용
+    val applicationContext: AnnotationConfigWebApplicationContext = object: AnnotationConfigWebApplicationContext() {
+        @Suppress("ACCIDENTAL_OVERRIDE")
+        override fun setClassLoader(classLoader: ClassLoader) {
+            this.classLoader = classLoader
+        }
+
+        override fun onRefresh() {
+            super.onRefresh()
+
+            val serverFactory: ServletWebServerFactory = TomcatServletWebServerFactory()
+            val webServer = serverFactory.getWebServer(ServletContextInitializer {
+                it.addServlet(
+                    "dispatcherServlet",
+                    DispatcherServlet(this)
+                ).addMapping("/*")
+            })
+            webServer.start()
+        }
+    }.apply {
+        register(HellobootApplication::class.java)
     }
     applicationContext.refresh()
-
-    val serverFactory: ServletWebServerFactory = TomcatServletWebServerFactory()
-    val webServer = serverFactory.getWebServer(ServletContextInitializer {
-        it.addServlet("frontcontroller", object: HttpServlet() {
-            override fun service(req: HttpServletRequest, resp: HttpServletResponse) {
-                // 인증, 보안, 다국어, 공통 기능
-                if (req.requestURI.equals("/hello") && req.method.equals(HttpMethod.GET.name)) {
-                    val name: String = req.getParameter("name")
-                    val helloController: HelloController = applicationContext.getBean(HelloController::class.java)
-                    val ret = helloController.hello(name)
-
-                    resp.contentType = MediaType.TEXT_PLAIN_VALUE
-                    resp.writer.println(ret)
-                }
-                else {
-                    resp.status = HttpStatus.NOT_FOUND.value()
-                }
-            }
-        }).addMapping("/*")
-    })
-    webServer.start()
 }
