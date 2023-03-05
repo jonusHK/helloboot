@@ -2,7 +2,7 @@ package tobyspring.helloboot
 
 import org.springframework.boot.runApplication
 
-@MySpringBootAnnotation
+@MySpringBootApplication
 class HellobootApplication
 
 fun main(args: Array<String>) {
