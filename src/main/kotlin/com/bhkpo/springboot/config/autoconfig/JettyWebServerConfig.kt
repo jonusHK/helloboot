@@ -1,7 +1,7 @@
 package com.bhkpo.springboot.config.autoconfig
 
 import com.bhkpo.springboot.config.MyAutoConfiguration
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Condition
@@ -10,19 +10,19 @@ import org.springframework.context.annotation.Conditional
 import org.springframework.core.type.AnnotatedTypeMetadata
 
 @MyAutoConfiguration
-@Conditional(TomcatWebServerConfig.Companion.TomcatCondition::class)
-class TomcatWebServerConfig {
+@Conditional(JettyWebServerConfig.Companion.JettyCondition::class)
+class JettyWebServerConfig {
 
-    @Bean
+    @Bean("jettyWebServerFactory")
     fun servletWebServerFactory(): ServletWebServerFactory {
-        return TomcatServletWebServerFactory()
+        return JettyServletWebServerFactory()
     }
 
     companion object {
-        class TomcatCondition: Condition {
-            override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
-                return true
-            }
+        class JettyCondition: Condition {
+           override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
+               return false
+           }
         }
     }
 }
