@@ -21,7 +21,7 @@ class HelloApiTest: AnnotationSpec() {
         val rest: TestRestTemplate = TestRestTemplate()
 
         val res: ResponseEntity<String> =
-            rest.getForEntity("http://localhost:8080/hello?name={name}", String::class.java, "Spring")
+            rest.getForEntity("http://localhost:8080/app/hello?name={name}", String::class.java, "Spring")
 
         // Check
         // status 200
@@ -37,7 +37,7 @@ class HelloApiTest: AnnotationSpec() {
         val rest: TestRestTemplate = TestRestTemplate()
 
         val res: ResponseEntity<String> =
-            rest.getForEntity("http://localhost:8080/hello?name={name}", String::class.java, "")
+            rest.getForEntity("http://localhost:8080/app/hello?name={name}", String::class.java, "")
 
         res.statusCode shouldBe HttpStatus.INTERNAL_SERVER_ERROR
     }
