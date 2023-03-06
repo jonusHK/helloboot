@@ -9,7 +9,7 @@ class MySpringApplication {
 
     companion object {
         @JvmStatic
-        fun run(applicationClass: Class<*>, vararg args: String) {
+        fun run() {
             val applicationContext: AnnotationConfigWebApplicationContext = object: AnnotationConfigWebApplicationContext() {
                 @Suppress("ACCIDENTAL_OVERRIDE")
                 override fun setClassLoader(classLoader: ClassLoader) {
