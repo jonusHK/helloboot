@@ -26,40 +26,38 @@ class ConditionalTest: AnnotationSpec() {
         }
     }
 
-    companion object {
-        @Retention(AnnotationRetention.RUNTIME)
-        @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
-        @Conditional(BooleanCondition::class)
-        annotation class BooleanConditional(val value: Boolean)
+    @Retention(AnnotationRetention.RUNTIME)
+    @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
+    @Conditional(BooleanCondition::class)
+    annotation class BooleanConditional(val value: Boolean)
 
 
-        @Configuration
-        @BooleanConditional(true)
-        class Config1 {
-            @Bean
-            fun myBean(): MyBean {
-                return MyBean()
-            }
+    @Configuration
+    @BooleanConditional(true)
+    class Config1 {
+        @Bean
+        fun myBean(): MyBean {
+            return MyBean()
         }
-
-        @Configuration
-        @BooleanConditional(false)
-        class Config2 {
-            @Bean
-            fun myBean(): MyBean {
-                return MyBean()
-            }
-        }
-
-        class MyBean {}
-
-        class BooleanCondition: Condition {
-            override fun matches(conditionContext: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
-                val annotationAttributes: MutableMap<String, Any>? =
-                    metadata.getAnnotationAttributes(BooleanConditional::class.java.name)
-                return annotationAttributes?.get("value") as Boolean
-            }
-        }
-
     }
+
+    @Configuration
+    @BooleanConditional(false)
+    class Config2 {
+        @Bean
+        fun myBean(): MyBean {
+            return MyBean()
+        }
+    }
+
+    class MyBean {}
+
+    class BooleanCondition: Condition {
+        override fun matches(conditionContext: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
+            val annotationAttributes: MutableMap<String, Any>? =
+                metadata.getAnnotationAttributes(BooleanConditional::class.java.name)
+            return annotationAttributes?.get("value") as Boolean
+        }
+    }
+
 }
