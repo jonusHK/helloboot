@@ -1,4 +1,4 @@
-package tobyspring.config
+package com.bhkpo.springboot.config
 
 import org.springframework.context.annotation.Import
 

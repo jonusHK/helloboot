@@ -1,7 +1,7 @@
-package tobyspring.helloboot
+package com.bhkpo.springboot.helloboot
 
 import org.springframework.boot.runApplication
-import tobyspring.config.MySpringBootApplication
+import com.bhkpo.springboot.config.MySpringBootApplication
 
 @MySpringBootApplication
 class HellobootApplication
