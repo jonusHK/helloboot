@@ -1,4 +1,4 @@
-package tobyspring.helloboot
+package com.bhkpo.springboot.helloboot
 
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe

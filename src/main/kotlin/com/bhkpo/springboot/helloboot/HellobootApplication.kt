@@ -1,8 +1,9 @@
-package tobyspring.helloboot
+package com.bhkpo.springboot.helloboot
 
 import org.springframework.boot.runApplication
+import com.bhkpo.springboot.config.MySpringBootApplication
 
-@MySpringBootAnnotation
+@MySpringBootApplication
 class HellobootApplication
 
 fun main(args: Array<String>) {

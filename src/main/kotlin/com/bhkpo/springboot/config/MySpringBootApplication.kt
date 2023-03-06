@@ -1,10 +1,11 @@
-package tobyspring.helloboot
+package com.bhkpo.springboot.config
 
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
+@Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
 @Configuration
 @ComponentScan
-annotation class MySpringBootAnnotation
+@EnableMyAutoConfiguration
+annotation class MySpringBootApplication

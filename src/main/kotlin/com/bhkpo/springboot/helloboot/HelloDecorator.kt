@@ -1,4 +1,4 @@
-package tobyspring.helloboot
+package com.bhkpo.springboot.helloboot
 
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Service
