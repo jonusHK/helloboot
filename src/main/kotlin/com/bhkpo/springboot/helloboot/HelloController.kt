@@ -13,4 +13,9 @@ class HelloController(val helloService: HelloService) {
         if (name.isNullOrBlank()) throw IllegalArgumentException()
         return helloService.sayHello(name)
     }
+
+    @GetMapping("/count")
+    fun count(name: String): String {
+        return "$name : ${helloService.countOf(name).toString()}"
+    }
 }

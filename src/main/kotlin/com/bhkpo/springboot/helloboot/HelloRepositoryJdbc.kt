@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository
 class HelloRepositoryJdbc(val jdbcTemplate: JdbcTemplate): HelloRepository {
     override fun findHello(name: String): Hello? {
         return try {
-            jdbcTemplate.queryForObject("select * from hello where name = '$name'") { rs, _ -> Hello(rs.getString("name"), rs.getInt("count"))
+            jdbcTemplate.queryForObject("select * from hello where name = '$name'") { rs, _ ->
+                Hello(rs.getString("name"), rs.getInt("count"))
             }
         } catch(e: EmptyResultDataAccessException) {
             null

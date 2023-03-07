@@ -1,20 +1,17 @@
 package com.bhkpo.springboot.helloboot
 
 import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 
 @HellobootTest
 class HelloRepositoryTest(
-    @Autowired private val helloRepository: HelloRepository,
-    @Autowired private val jdbcTemplate: JdbcTemplate
+    @Autowired private val helloRepository: HelloRepository
 ): AnnotationSpec() {
 
-    @BeforeEach
-    fun init() {
-        jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)")
-    }
+    override fun extensions() = listOf(SpringExtension)
 
     @Test
     fun findHelloFailed() {
