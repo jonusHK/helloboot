@@ -3,3 +3,4 @@ com.bhkpo.springboot.config.autoconfig.TomcatWebServerConfig
 com.bhkpo.springboot.config.autoconfig.JettyWebServerConfig
 com.bhkpo.springboot.config.autoconfig.PropertyPlaceholderConfig
 com.bhkpo.springboot.config.autoconfig.PropertyPostProcessorConfig
+com.bhkpo.springboot.config.autoconfig.DataSourceConfig

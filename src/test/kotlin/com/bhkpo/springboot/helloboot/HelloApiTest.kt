@@ -11,11 +11,6 @@ import org.springframework.http.ResponseEntity
 
 class HelloApiTest: AnnotationSpec() {
 
-    @BeforeEach
-    fun beforeTest() {
-        println("Before each Test")
-    }
-
     @Test
     fun helloApi() {
         val rest: TestRestTemplate = TestRestTemplate()

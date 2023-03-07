@@ -4,10 +4,19 @@ import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.matchers.shouldBe
 
 class HelloServiceTest: AnnotationSpec() {
+    companion object {
+        @JvmStatic private val helloRepositoryStub = object: HelloRepository {
+            override fun findHello(name: String): Hello? {
+                return null
+            }
+
+            override fun increaseCount(name: String) {}
+        }
+    }
 
     @Test
     fun simpleHelloService() {
-        val helloService = SimpleHelloService()
+        val helloService = SimpleHelloService(helloRepositoryStub)
 
         val ret: String = helloService.sayHello("Test")
 
