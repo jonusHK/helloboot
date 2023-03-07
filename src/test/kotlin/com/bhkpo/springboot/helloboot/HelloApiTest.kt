@@ -1,15 +1,21 @@
 package com.bhkpo.springboot.helloboot
 
 import io.kotest.core.spec.style.AnnotationSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldStartWith
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.test.context.TestPropertySource
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class HelloApiTest: AnnotationSpec() {
+
+    override fun extensions() = listOf(SpringExtension)
 
     @Test
     fun helloApi() {

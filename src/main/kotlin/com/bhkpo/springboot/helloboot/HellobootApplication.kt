@@ -1,17 +1,11 @@
 package com.bhkpo.springboot.helloboot
 
-import com.bhkpo.springboot.config.EnableMyConfigurationProperties
-import org.springframework.boot.runApplication
-import com.bhkpo.springboot.config.MySpringBootApplication
-import com.bhkpo.springboot.config.autoconfig.MyDataSourceProperties
 import javax.annotation.PostConstruct
-import org.springframework.boot.ApplicationRunner
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
-import org.springframework.core.env.Environment
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 import org.springframework.jdbc.core.JdbcTemplate
 
-@MySpringBootApplication
+@SpringBootApplication
 class HellobootApplication(val jdbcTemplate: JdbcTemplate) {
 
     @PostConstruct
