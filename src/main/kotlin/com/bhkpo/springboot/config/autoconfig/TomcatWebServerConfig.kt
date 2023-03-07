@@ -15,11 +15,15 @@ class TomcatWebServerConfig {
     @Value("\${contextPath}")
     lateinit var contextPath: String
 
+    @Value("\${port}")
+    var port: Int? = null
+
     @Bean("tomcatWebServerFactory")
     @ConditionalOnMissingBean
-    fun servletWebServerFactory(): ServletWebServerFactory {
+    fun servletWebServerFactory(properties: ServerProperties): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
-        factory.contextPath = contextPath
+        factory.contextPath = properties.contextPath
+        factory.port = properties.port!!
         return factory
     }
 }
