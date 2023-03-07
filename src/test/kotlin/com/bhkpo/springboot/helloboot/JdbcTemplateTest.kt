@@ -4,9 +4,12 @@ import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.transaction.annotation.Transactional
 
-@HellobootTest
+@JdbcTest
+@Transactional
 class JdbcTemplateTest(
     @Autowired private val jdbcTemplate: JdbcTemplate
 ): AnnotationSpec() {

@@ -1,14 +1,14 @@
-package com.bhkpo.springboot
+package com.bhkpo.springboot.helloboot
 
-import com.bhkpo.springboot.helloboot.HelloRepository
-import com.bhkpo.springboot.helloboot.HelloService
-import com.bhkpo.springboot.helloboot.HellobootTest
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.transaction.annotation.Transactional
 
-@HellobootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@Transactional
 class HelloServiceCountTest(
     @Autowired private val helloService: HelloService,
     @Autowired private val helloRepository: HelloRepository
