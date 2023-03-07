@@ -14,10 +14,10 @@ import org.springframework.context.annotation.Import
 @Import(ServerProperties::class)
 class TomcatWebServerConfig {
 
-    @Value("\${contextPath}")
+    @Value("\${server.contextPath}")
     lateinit var contextPath: String
 
-    @Value("\${port}")
+    @Value("\${server.port}")
     var port: Int? = null
 
     @Bean("tomcatWebServerFactory")
