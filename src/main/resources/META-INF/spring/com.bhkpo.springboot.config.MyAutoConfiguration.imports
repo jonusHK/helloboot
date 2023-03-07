@@ -2,4 +2,4 @@ com.bhkpo.springboot.config.autoconfig.DispatcherServletConfig
 com.bhkpo.springboot.config.autoconfig.TomcatWebServerConfig
 com.bhkpo.springboot.config.autoconfig.JettyWebServerConfig
 com.bhkpo.springboot.config.autoconfig.PropertyPlaceholderConfig
-com.bhkpo.springboot.config.autoconfig.ServerPropertiesConfig
+com.bhkpo.springboot.config.autoconfig.PropertyPostProcessorConfig
