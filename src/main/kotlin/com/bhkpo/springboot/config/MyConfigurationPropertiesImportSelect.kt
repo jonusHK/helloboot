@@ -11,3 +11,4 @@ class MyConfigurationPropertiesImportSelect: DeferredImportSelector {
         return arrayOf(propertyClass?.name ?: "")
     }
 }
+

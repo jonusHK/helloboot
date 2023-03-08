@@ -12,3 +12,4 @@ class MyOnClassCondition: Condition {
         return value?.let { ClassUtils.isPresent(it, context.classLoader) } ?: false
     }
 }
+

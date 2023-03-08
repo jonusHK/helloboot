@@ -7,3 +7,4 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.TYPE, AnnotationTarget.CLASS)
 @Import(MyConfigurationPropertiesImportSelect::class)
 annotation class EnableMyConfigurationProperties(val value: KClass<*>)
+
